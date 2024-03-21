@@ -96,8 +96,8 @@ function RegisterForm() {
               )}
             />
           </div>
-          <FormError message={"Invalid user"} />
-          <FormSuccess message={"Login Success"} />
+          {/* <FormError message={"Invalid user"} />
+          <FormSuccess message={"Login Success"} /> */}
           <Button type="submit" className="w-full">
             Register
           </Button>

@@ -23,3 +23,18 @@ export const RegisterSchema = z.object({
     message: "Name is required",
   }),
 });
+
+export const AboutTutorSchema = z.object({
+  firstName: z.string().max(20, {
+    message: "Max 20 characters required",
+  }),
+  lastName: z.string().max(20, {
+    message: "Max 20 characters required",
+  }),
+  email: z.string().email({
+    message: "Email is required",
+  }),
+  phone: z.string().max(10, {
+    message: "must 10 characters required",
+  }),
+});

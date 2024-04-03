@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import { Inter, Roboto } from "next/font/google";
+import { Inter, Outfit, Roboto } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { EdgeStoreProvider } from "@/lib/edgestore";
-// import { ReactQueryClientProvider } from "@/components/ReactQueryClientProvider";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient } from "@tanstack/react-query";
 import { ReactQueryClientProvider } from "@/components/ReactQueryClientProvider";
-// import Providers from "@/redux/Providers";
 import dynamic from "next/dynamic";
+import { MantineProvider } from "@mantine/core";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +18,7 @@ const queryClient = new QueryClient();
 const ReduxProvider = dynamic(() => import("@/redux/Providers"), {
   ssr: false,
 });
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -28,13 +27,10 @@ export default function RootLayout({
     <ReactQueryClientProvider>
       <html lang="en">
         <body className={inter.className}>
-          {/* <div className=" md:px-20">{children}</div> */}
           <Toaster />
           <EdgeStoreProvider>
             <ReduxProvider>{children}</ReduxProvider>
           </EdgeStoreProvider>
-
-          {/* {children} */}
         </body>
       </html>
     </ReactQueryClientProvider>

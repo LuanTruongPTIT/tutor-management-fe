@@ -18,14 +18,16 @@ export default function NavButtons({ isCheck }: NavButtonsProps) {
   }
   return (
     <div className="py-[24px] flex items-end justify-end flex-end gap-2">
-      <Button
-        variant="outline"
-        className="inline-flex items-center px-5 py-2 mt-4 sm:mt-6 text-sm font-medium text-center  rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 "
-        onClick={handlePrevious}
-      >
-        <ChevronLeft className="w-5 h-5 mr-2" />
-        <span>Previous</span>
-      </Button>
+      {currentStep > 1 && (
+        <Button
+          variant="outline"
+          className="inline-flex items-center px-5 py-2 mt-4 sm:mt-6 text-sm font-medium text-center  rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 "
+          onClick={handlePrevious}
+        >
+          <ChevronLeft className="w-5 h-5 mr-2" />
+          <span>Previous</span>
+        </Button>
+      )}
       <Button
         className="inline-flex items-center px-5 py-2 mt-4 sm:mt-6 text-sm font-medium text-center
        text-white bg-slate-900 rounded-lg focus:ring-4

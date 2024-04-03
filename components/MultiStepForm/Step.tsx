@@ -13,7 +13,7 @@ export default function Step({ step }: { step: IStep }) {
     <div className="flex flex-col md:flex-row items-center gap-3 ">
       <div
         className={`w-8  h-8  text-slate-50 border border-slate-50 rounded-full flex items-center justify-center font-bold flex-shrink-0 ${
-          number === currentStep ? "bg-blue-300 border-0" : ""
+          number === currentStep ? "bg-[#1e293b] border-0" : ""
         }`}
       >
         {number}

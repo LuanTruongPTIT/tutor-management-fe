@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { startTransition, useState, useTransition } from "react";
 import CardWrapper from "./card-wrapper";
 import { useForm } from "react-hook-form";
 import {
@@ -17,8 +17,13 @@ import { FormError } from "../forrm-error";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { RegisterSchema } from "@/schema";
+import { CreateUser } from "@/modules/user/user.service";
 
 function RegisterForm() {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
+  const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
@@ -28,7 +33,22 @@ function RegisterForm() {
       name: "",
     },
   });
-  const onSubmit = (values: z.infer<typeof RegisterSchema>) => {};
+
+  const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
+    startTransition(async () => {
+      setError("");
+      setSuccess("");
+      setLoading(true);
+      await CreateUser(values).then((data) => {
+        setTimeout(() => {
+          setError(data.error);
+          setSuccess(data.success);
+          setLoading(false);
+        }, 2000);
+      });
+    });
+  };
+
   return (
     <CardWrapper
       headerLabel="Welcome back"
@@ -96,8 +116,8 @@ function RegisterForm() {
               )}
             />
           </div>
-          {/* <FormError message={"Invalid user"} />
-          <FormSuccess message={"Login Success"} /> */}
+          {error ? <FormError message={"Something is wrong"} /> : null}
+          {success ? <FormSuccess message={"Register Success"} /> : null}
           <Button type="submit" className="w-full">
             Register
           </Button>

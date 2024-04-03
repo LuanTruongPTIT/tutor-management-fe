@@ -37,4 +37,14 @@ export const AboutTutorSchema = z.object({
   phone: z.string().max(10, {
     message: "must 10 characters required",
   }),
+  isAge18: z.boolean().refine((value) => value === true, {
+    message: "isAge18 is required",
+  }),
+});
+
+export const EducationSchema = z.object({
+  universityName: z.string().nullable(),
+  degree: z.string().nullable(),
+  degreeType: z.string(),
+  specialization: z.string(),
 });

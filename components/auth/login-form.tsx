@@ -5,6 +5,7 @@ import CardWrapper from "./card-wrapper";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { LoginSchema } from "@/schema";
+import { BeatLoader } from "react-spinners";
 import {
   Form,
   FormControl,
@@ -18,17 +19,20 @@ import { Button } from "../ui/button";
 import { FormError } from "../forrm-error";
 import { FormSuccess } from "../form-success";
 import { useMutation } from "@tanstack/react-query";
-import { CreateUser } from "@/modules/user/user.service";
-import { CreateUserModel } from "@/modules/models/user.model";
+import { LoginUser } from "@/modules/user/user.service";
+import { useSearchParams } from "next/navigation";
+
 const initialFormState = {
   email: "",
   password: "",
 };
 function LoginForm() {
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
-  // const [,  = useState<string | undefined>("")
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -42,15 +46,18 @@ function LoginForm() {
   //     return CreateUser(body);
   //   },
   // });
+
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-    console.log(values);
-    // mutate();
-    startTransition(() => {
+    startTransition(async () => {
       setError("");
       setSuccess("");
-      CreateUser(values).then((data) => {
-        setError(data.error);
-        setSuccess(data.success);
+      setLoading(true);
+      await LoginUser(values, callbackUrl).then((data) => {
+        setTimeout(() => {
+          setError(data.error);
+          setSuccess(data.success);
+          setLoading(false);
+        }, 2000);
       });
     });
   };
@@ -98,7 +105,7 @@ function LoginForm() {
           <FormError message={error} />
           <FormSuccess message={success} />
           <Button type="submit" className="w-full">
-            Login
+            {loading ? <BeatLoader color="#F5F5F5" /> : "Login"}
           </Button>
         </form>
       </Form>

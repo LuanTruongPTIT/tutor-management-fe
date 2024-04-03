@@ -1,3 +1,5 @@
+import { updateFormData } from "@/redux/slices/onboardingTutorSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { UploadCloudIcon, X } from "lucide-react";
 import * as React from "react";
 import { DropzoneOptions, useDropzone } from "react-dropzone";
@@ -42,13 +44,16 @@ const SingleImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
     { dropzoneOptions, width, height, value, className, disabled, onChange },
     ref
   ) => {
+    const dispatch = useAppDispatch();
     const imageUrl = React.useMemo(() => {
       if (typeof value === "string") {
         // in case a url is passed in, use it to display the image
+        console.log("imageUrl", value);
         return value;
       } else if (value) {
         // in case a file is passed in, create a base64 url to display the image
-        return URL.createObjectURL(value);
+        const data = URL.createObjectURL(value);
+        return data;
       }
       return null;
     }, [value]);
@@ -68,7 +73,7 @@ const SingleImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
       disabled,
       onDrop: (acceptedFiles) => {
         const file = acceptedFiles[0];
-        console.log("file", file);
+
         if (file) {
           void onChange?.(file);
         }

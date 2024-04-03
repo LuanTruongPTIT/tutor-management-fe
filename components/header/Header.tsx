@@ -14,7 +14,7 @@ function Header() {
     {
       id: 2,
       name: "Become a tutor",
-      path: "",
+      path: "/tutor/become",
     },
   ];
 

@@ -17,10 +17,14 @@ import { z } from "zod";
 import { Checkbox } from "@/components/ui/checkbox";
 import NavButtons from "../NavButton";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { setCurrentSteps } from "@/redux/slices/onboardingTutorSlice";
+import {
+  setCurrentSteps,
+  updateFormData,
+} from "@/redux/slices/onboardingTutorSlice";
 
 export default function AboutForm() {
   const currentStep = useAppSelector((store) => store.onboarding.currentStep);
+
   const form = useForm<z.infer<typeof AboutTutorSchema>>({
     resolver: zodResolver(AboutTutorSchema),
     defaultValues: {
@@ -28,12 +32,13 @@ export default function AboutForm() {
       lastName: "",
       email: "",
       phone: "",
+      isAge18: false,
     },
   });
   const dispatch = useAppDispatch();
   async function processData(data: z.infer<typeof AboutTutorSchema>) {
-    console.log("data", data);
     dispatch(setCurrentSteps(currentStep + 1));
+    dispatch(updateFormData(data));
   }
   return (
     <Form {...form}>
@@ -115,13 +120,23 @@ export default function AboutForm() {
           {/* <FormError message={error} />
         <FormSuccess message={success} /> */}
           <div className="flex items-center space-x-2">
-            <Checkbox id="terms" />
-            <label
-              htmlFor="terms"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-              I confirm I’m over 18
-            </label>
+            <FormField
+              control={form.control}
+              name="isAge18"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormLabel>I confirm I’m over 18</FormLabel>
+                  </div>
+                </FormItem>
+              )}
+            />
           </div>
           <NavButtons />
         </form>

@@ -1,36 +1,54 @@
 import { z } from "zod";
 // import { CreateUserModel } from "../models/user.model";
-import { LoginSchema } from "@/schema";
-export async function CreateUser(values: z.infer<typeof LoginSchema>) {
-  // const result = await fetch(`/api/sign-up`, {
-  //   method: "POST",
-  //   body: JSON.stringify(values),
-  //   headers: { "Content-type": "application/json; charset=UTF-8" },
-  // });
-  // console.log("result", result);
-  // if (!result) {
-  //   return { error: "Something wrong" };
-  // }
-  // return { success: "create user is success" };
+import { LoginSchema, RegisterSchema } from "@/schema";
+
+type dataRegisterResponse = {
+  message: string;
+  statusCode: string;
+};
+export async function LoginUser(
+  values: z.infer<typeof LoginSchema>,
+  callbackUrl?: string | null
+) {
   try {
-    const result = await fetch(`/api/sign-up`, {
+    const result = await fetch("http://localhost:8001/api/auth/signIn", {
       method: "POST",
       body: JSON.stringify(values),
       headers: { "Content-type": "application/json; charset=UTF-8" },
     });
-
+    const resultServer = await fetch("http://localhost:3000/api/auth", {
+      method: "POST",
+      body: JSON.stringify(values),
+      headers: { "Content-type": "application/json; charset=UTF-8" },
+    });
+    const data = await result.json();
+    console.log("data", data);
     if (!result.ok) {
-      // Xử lý trường hợp fetch trả về lỗi
+      throw new Error("Failed to login user Server returned " + result.status);
+    }
+    return { success: data.message };
+  } catch (error) {
+    return { error: "Something went wrong" };
+  }
+}
+
+export async function CreateUser(values: z.infer<typeof RegisterSchema>) {
+  console.log("values", values);
+  try {
+    const result = await fetch("http://localhost:8001/api/user/signUp", {
+      method: "POST",
+      body: JSON.stringify(values),
+      headers: { "Content-type": "application/json; charset=UTF-8" },
+    });
+    const data = await result.json();
+    console.log("data", data);
+    if (!result.ok) {
       throw new Error(
         "Failed to create user. Server returned " + result.status
       );
     }
-
-    // Nếu mọi thứ thành công, trả về dữ liệu thành công
-    return { success: "create user is success" };
+    return { success: data.message };
   } catch (error) {
-    // Xử lý lỗi nếu fetch gặp vấn đề
-    // console.error("Failed to create user:", error.message);
     return { error: "Something went wrong" };
   }
 }

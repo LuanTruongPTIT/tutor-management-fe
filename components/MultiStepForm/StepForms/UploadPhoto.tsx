@@ -7,11 +7,16 @@ import Link from "next/link";
 import { useState } from "react";
 import NavButtons from "../NavButton";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { setCurrentSteps } from "@/redux/slices/onboardingTutorSlice";
+import {
+  setCurrentSteps,
+  updateFormData,
+} from "@/redux/slices/onboardingTutorSlice";
 
 export default function UploadPhoto() {
-  const currentStep = useAppSelector((store) => store.onboarding.currentStep);
   const [file, setFile] = useState<File>();
+
+  const currentStep = useAppSelector((store) => store.onboarding.currentStep);
+
   const [progress, setProgress] = useState(0);
   const [urls, setUrls] = useState<{
     url: string;
@@ -45,6 +50,7 @@ export default function UploadPhoto() {
           setFile(file);
         }}
       />
+
       <div className="h-[6px] w-44 border rounded overflow-hidden">
         <div
           className="h-full bg-black transition-all duration-150"
@@ -74,6 +80,7 @@ export default function UploadPhoto() {
               url: res.url,
               thumbnailUrl: res.thumbnailUrl,
             });
+            dispatch(updateFormData({ url: res.url }));
           }
         }}
       >

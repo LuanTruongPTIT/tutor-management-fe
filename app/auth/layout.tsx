@@ -1,4 +1,4 @@
-import Header from "@/components/header/Header";
+import Header from "@/components/header/Heade-Auth";
 import React from "react";
 
 function Authlayout({ children }: { children: React.ReactNode }) {

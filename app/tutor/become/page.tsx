@@ -10,19 +10,19 @@ export default function TutorOnBoardingPage() {
     },
     {
       number: 2,
-      title: "Education",
+      title: "Upload photo",
     },
     {
       number: 3,
-      title: "Programming Experience",
+      title: "Education",
     },
     {
       number: 4,
-      title: "Preferred Programming Languages",
+      title: "Profile description",
     },
     {
       number: 5,
-      title: "Technical Skills Assessment",
+      title: "Avaliability",
     },
     {
       number: 6,

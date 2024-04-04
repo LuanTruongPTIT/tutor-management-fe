@@ -1,4 +1,5 @@
 import { Icons } from "@/components/icons";
+import { LucideIcon } from "lucide-react";
 
 export interface NavItem {
   title: string;

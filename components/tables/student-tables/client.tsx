@@ -1,6 +1,6 @@
 "use client";
 import { DataTable } from "@/components/ui/data-table";
-import { Student, User } from "@/constants/data";
+import { Student } from "@/constants/data";
 
 import { Separator } from "@radix-ui/react-separator";
 import { useRouter } from "next/navigation";
@@ -9,9 +9,9 @@ import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Plus } from "lucide-react";
 interface ProductClientProps {
-  data: User[];
+  data: Student[];
 }
-export const UserClient: React.FC<ProductClientProps> = ({ data }) => {
+export const StudentClient: React.FC<ProductClientProps> = ({ data }) => {
   console.log(data);
   const router = useRouter();
   return (

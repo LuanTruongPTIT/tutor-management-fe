@@ -33,6 +33,11 @@ import { Dayjs } from "dayjs";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import {
+  setCurrentSteps,
+  updateFormData,
+} from "@/redux/slices/onboardingTutorSlice";
 type Framework = Record<"value" | "label", string>;
 type Subjects = Record<"value" | "label", string>;
 const FRAMEWORKS = [
@@ -127,28 +132,17 @@ export function MultiSelect() {
   const [selectedTime, setSelectedTime] = React.useState<
     [Date | null, Date | null]
   >([null, null]);
-  const [timePickers, setTimePickers] = React.useState([
-    <TimePicker.RangePicker
-      key={0}
-      onChange={(
-        dates: NoUndefinedRangeValueType<Dayjs>,
-        dateStrings: [string, string]
-      ) =>
-        handleTimeChange([
-          dates[0]?.toDate() || null,
-          dates[1]?.toDate() || null,
-        ])
-      }
-    />,
-  ]);
+  const [timePickers, setTimePickers] = React.useState([0]);
   const addTimePicker = () => {
-    setTimePickers([
-      ...timePickers,
-      <TimePicker.RangePicker key={timePickers.length} className="pl-[10px]" />,
-    ]);
+    setTimePickers([...timePickers, timePickers.length]);
   };
-
-  const handleTimeChange = (value: [Date | null, Date | null]) => {
+  const removeTimePicker = (indexToRemove: number) => {
+    setTimePickers(timePickers.filter((_, index) => index !== indexToRemove));
+  };
+  const handleTimeChange = (
+    value: [Date | null, Date | null],
+    dateStrings: any
+  ) => {
     setSelectedTime(value);
     console.log("Selected time range:", value);
   };
@@ -200,16 +194,23 @@ export function MultiSelect() {
     },
     []
   );
+  const currentStep = useAppSelector((store) => store.onboarding.currentStep);
+  const result = useAppSelector((data) => data.onboarding.formData);
+  const dispatch = useAppDispatch();
   const selectables = FRAMEWORKS.filter(
     (framework) => !selected.includes(framework)
   );
   const selectSubjects = Subjects.filter(
     (subject) => !selectedSubject.includes(subject)
   );
+
   async function processData(data: z.infer<typeof AvabilitySchema>) {
     data.subject = selected.map((framework) => framework.value);
+    data.teachArea = selectedSubject.map((subject) => subject.value);
+    dispatch(setCurrentSteps(currentStep + 1));
+    dispatch(updateFormData(data));
 
-    console.log("data", data);
+    console.log("data", result);
   }
   // console.log("data", selected);
   return (
@@ -408,7 +409,7 @@ export function MultiSelect() {
                           ? languages.find(
                               (language) => language.value === field.value
                             )?.label
-                          : "Select language"}
+                          : " Select options"}
                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                       </Button>
                     </FormControl>
@@ -459,21 +460,42 @@ export function MultiSelect() {
               </FormItem>
             )}
           />
-          {/* <TimePicker.RangePicker
-            onChange={(
-              dates: NoUndefinedRangeValueType<Dayjs>,
-              dateStrings: [string, string]
-            ) =>
-              handleTimeChange([
-                dates[0]?.toDate() || null,
-                dates[1]?.toDate() || null,
-              ])
-            }
-          /> */}
-          <div>
-            {timePickers}
-            <Button onClick={addTimePicker}>+</Button>
-          </div>
+          {/* 
+          {timePickers.map((_, index) => (
+            <div key={index} className="flex flex-row mb-2 gap-3">
+              <TimePicker.RangePicker
+                onChange={(
+                  dates: [Dayjs | null, Dayjs | null],
+                  dateStrings: [string, string]
+                ) => {
+                  const convertedDates: [Date | null, Date | null] = [
+                    dates[0]?.toDate() ?? null,
+                    dates[1]?.toDate() ?? null,
+                  ];
+                  handleTimeChange(convertedDates, dateStrings);
+                }}
+                className="pl-2"
+              />
+              <div className="">
+                <Button
+                  onClick={() => removeTimePicker(index)}
+                  // variant=""
+                  size="icon"
+                  className="mt-1 mr-1 z-[1]"
+                >
+                  x
+                </Button>
+                <Button
+                  size="icon"
+                  className="mt-1 mr-1 z-[1]"
+                  onClick={addTimePicker}
+                >
+                  +
+                </Button>
+              </div>
+            </div>
+          ))} */}
+
           <NavButtons />
         </form>
       </div>

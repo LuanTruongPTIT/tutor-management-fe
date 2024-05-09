@@ -1,6 +1,7 @@
 import { updateFormData } from "@/redux/slices/onboardingTutorSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { UploadCloudIcon, X } from "lucide-react";
+import Image from "next/image";
 import * as React from "react";
 import { DropzoneOptions, useDropzone } from "react-dropzone";
 import { twMerge } from "tailwind-merge";
@@ -73,7 +74,6 @@ const SingleImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
       disabled,
       onDrop: (acceptedFiles) => {
         const file = acceptedFiles[0];
-
         if (file) {
           void onChange?.(file);
         }
@@ -137,10 +137,12 @@ const SingleImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
 
           {imageUrl ? (
             // Image Preview
-            <img
+            <Image
               className="h-full w-full rounded-md object-cover"
               src={imageUrl}
               alt={acceptedFiles[0]?.name}
+              width={200}
+              height={150}
             />
           ) : (
             // Upload Icon
@@ -148,7 +150,9 @@ const SingleImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
               <UploadCloudIcon className="mb-2 h-7 w-7" />
               <div className="text-gray-400">drag & drop to upload</div>
               <div className="mt-3">
-                <Button disabled={disabled}>select</Button>
+                <Button disabled={disabled} onClick={(e) => e.preventDefault()}>
+                  select
+                </Button>
               </div>
             </div>
           )}

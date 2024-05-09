@@ -11,7 +11,9 @@ export default function SettingsProfilePage() {
         </p>
       </div>
       <Separator />
-      <ProfileForm />
+      <div className="flex flex-col items-center">
+        <ProfileForm />
+      </div>
     </div>
   );
 }

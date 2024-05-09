@@ -13,6 +13,7 @@ const onboardingTutorSlice = createSlice({
   initialState,
   reducers: {
     setCurrentSteps: (state, action) => {
+      console.log("action.payload", action.payload);
       state.currentStep = action.payload;
     },
     updateFormData: (state, action) => {

@@ -18,12 +18,12 @@ export const StudentClient: React.FC<ProductClientProps> = ({ data }) => {
     <>
       <div className="flex items-start justify-between">
         <Heading
-          title={`Tutors (${data?.length ?? 0})`}
-          description="Manage tutors (Client side table functionalities.)"
+          title={`Students (${data?.length ?? 0})`}
+          description="Manage student (Client side table functionalities.)"
         />
         <Button
           className="text-xs md:text-sm"
-          onClick={() => router.push(`/dashboard/user/new`)}
+          onClick={() => router.push(`/admin/student/new`)}
         >
           <Plus className="mr-2 h-4 w-4" /> Add New
         </Button>

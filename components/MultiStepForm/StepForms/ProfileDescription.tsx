@@ -38,6 +38,7 @@ const FormSchema = z.object({
 export function ProfileDescription() {
   const currentStep = useAppSelector((store) => store.onboarding.currentStep);
   const dispatch = useAppDispatch();
+  // const currentStep = useAppDispatch();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });

@@ -35,7 +35,7 @@ export default function CategorySearch() {
           gap-2 hover:scale-110 transition-all ease-in-out"
         >
           <Image src="/mathematics.png" alt="icon" width={40} height={40} />
-          <label className="text-blue-600 text-sm">Math</label>
+          <label className="text-sm">Math</label>
         </Link>
         <Link
           href={"/"}
@@ -46,7 +46,7 @@ export default function CategorySearch() {
           gap-2 hover:scale-110 transition-all ease-in-out"
         >
           <Image src="/mathematics.png" alt="icon" width={40} height={40} />
-          <label className="text-blue-600 text-sm">Math</label>
+          <label className=" text-sm">Math</label>
         </Link>
         <Link
           href={"/"}
@@ -57,7 +57,7 @@ export default function CategorySearch() {
           gap-2 hover:scale-110 transition-all ease-in-out"
         >
           <Image src="/mathematics.png" alt="icon" width={40} height={40} />
-          <label className="text-blue-600 text-sm">Math</label>
+          <label className=" text-sm">Math</label>
         </Link>
         <Link
           href={"/"}
@@ -68,7 +68,7 @@ export default function CategorySearch() {
           gap-2 hover:scale-110 transition-all ease-in-out"
         >
           <Image src="/mathematics.png" alt="icon" width={40} height={40} />
-          <label className="text-blue-600 text-sm">Math</label>
+          <label className=" text-sm">Math</label>
         </Link>
         <Link
           href={"/"}
@@ -79,7 +79,7 @@ export default function CategorySearch() {
           gap-2 hover:scale-110 transition-all ease-in-out"
         >
           <Image src="/mathematics.png" alt="icon" width={40} height={40} />
-          <label className="text-blue-600 text-sm">Math</label>
+          <label className=" text-sm">Math</label>
         </Link>
         <Link
           href={"/"}
@@ -90,7 +90,7 @@ export default function CategorySearch() {
           gap-2 hover:scale-110 transition-all ease-in-out"
         >
           <Image src="/mathematics.png" alt="icon" width={40} height={40} />
-          <label className="text-blue-600 text-sm">Math</label>
+          <label className="text-sm">Math</label>
         </Link>
       </div>
     </div>

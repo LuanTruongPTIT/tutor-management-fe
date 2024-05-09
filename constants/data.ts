@@ -1,5 +1,6 @@
 import { Icons } from "@/components/icons";
 import { NavItem, SidebarNavItem } from "@/types";
+import { faker } from "@faker-js/faker";
 import { Inbox } from "lucide-react";
 
 export type User = {
@@ -20,7 +21,24 @@ export const users: User[] = [
     status: "Active",
   },
 ];
-
+export type CoursesStudent = {
+  id: number;
+  subject: string;
+  teacher: string;
+  attendance: string;
+  start_date: string;
+  end_date: string;
+};
+export const StudentsCourses: CoursesStudent[] = [
+  {
+    id: 1,
+    subject: "Math",
+    teacher: "Truong Luan",
+    attendance: "55%",
+    start_date: "21-4-2024",
+    end_date: "21-6-2024",
+  },
+];
 export type Employee = {
   id: number;
   first_name: string;
@@ -43,13 +61,13 @@ export type Employee = {
 export const navItems: NavItem[] = [
   {
     title: "Dashboard",
-    href: "/admfin",
+    href: "/admin",
     icon: "dashboard",
     label: "Dashboard",
   },
   {
-    title: "Inbox",
-    href: "/admin/mail",
+    title: "Application",
+    href: "/admin/application",
     icon: "inbox",
     label: "Inbox",
   },
@@ -57,13 +75,19 @@ export const navItems: NavItem[] = [
     title: "Tutor",
     href: "/admin/tutor",
     icon: "user",
-    label: "tuor",
+    label: "tutor",
   },
   {
     title: "Student",
     href: "/admin/student",
     icon: "employee",
     label: "students",
+  },
+  {
+    title: "Team members",
+    href: "/admin/member",
+    icon: "user",
+    label: "members",
   },
   {
     title: "Profile",
@@ -78,10 +102,22 @@ export const navItems: NavItem[] = [
     label: "kanban",
   },
   {
+    title: "Stream",
+    href: "/admin/stream",
+    icon: "attendance",
+    label: "attendance",
+  },
+  {
     title: "Attendance",
     href: "/admin/attendance",
     icon: "attendance",
     label: "attendance",
+  },
+  {
+    title: "Meeting",
+    href: "/admin/meeting",
+    icon: "meeting",
+    label: "meeting",
   },
 ];
 
@@ -99,6 +135,64 @@ export type Student = {
   phone: string;
   address: string;
 };
+
+export type Tutor = {
+  id: number;
+  name: string;
+  photo: string;
+  verified: boolean;
+  status: string;
+  address: string;
+  phone: string;
+  email: string;
+  gender: string;
+};
+export const tutors: Tutor[] = [
+  {
+    id: 1,
+    name: "Truong Luan",
+    photo: "/golang2.png",
+    verified: true,
+    status: "active",
+    address: "17 street no.9",
+    phone: "0822036246",
+    email: "example@gmail.com",
+    gender: "Male",
+  },
+  {
+    id: 2,
+    name: "Truong Luan",
+    photo: "/golang2.png",
+    verified: true,
+    status: "active",
+    address: "17 street no.9",
+    phone: "0822036246",
+    email: "example@gmail.com",
+    gender: "Male",
+  },
+  {
+    id: 3,
+    name: "Truong Luan",
+    photo: "/golang2.png",
+    verified: true,
+    status: "active",
+    address: "17 street no.9",
+    phone: "0822036246",
+    email: "example@gmail.com",
+    gender: "Male",
+  },
+  {
+    id: 4,
+    name: "Truong Luan",
+    photo: "/golang2.png",
+    verified: true,
+    status: "active",
+    address: "17 street no.9",
+    phone: "0822036246",
+    email: "example@gmail.com",
+    gender: "Male",
+  },
+];
 export const students: Student[] = [
   {
     id: 1,
@@ -115,3 +209,4 @@ export const students: Student[] = [
     address: "17 street no.9",
   },
 ];
+// export const TutorDetail

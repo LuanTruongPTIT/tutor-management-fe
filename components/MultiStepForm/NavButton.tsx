@@ -35,7 +35,7 @@ export default function NavButtons({ isCheck }: NavButtonsProps) {
          hover:bg-slate-800 dark:bg-blue-600 dark:hover:bg-blue-700"
         onClick={handleNext}
       >
-        <span>{currentStep === 6 ? "Confirm and Submit" : "Continue"}</span>
+        <span>{currentStep === 5 ? "Confirm and Submit" : "Continue"}</span>
         <ChevronRight className="w-5 h-5 ml-2" />
       </Button>
     </div>

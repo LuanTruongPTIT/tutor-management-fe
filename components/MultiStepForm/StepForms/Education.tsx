@@ -155,7 +155,7 @@ export default function Education() {
         <FormSuccess message={success} /> */}
           <UploadMulti />
           {/* <TimePicker.RangePicker /> */}
-          <NavButtons />
+           <NavButtons />
         </form>
       </div>
     </Form>

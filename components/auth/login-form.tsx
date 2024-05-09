@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useTransition } from "react";
+import React, { useContext, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import CardWrapper from "./card-wrapper";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,8 +19,11 @@ import { Button } from "../ui/button";
 import { FormError } from "../forrm-error";
 import { FormSuccess } from "../form-success";
 import { useMutation } from "@tanstack/react-query";
-import { LoginUser } from "@/modules/user/user.service";
-import { useSearchParams } from "next/navigation";
+import { LoginUser, SetToken } from "@/modules/user/user.service";
+import { useRouter, useSearchParams } from "next/navigation";
+
+import { setProfileLS } from "@/lib/utils/auth.utils";
+import { useUser } from "@/context/app.context";
 
 const initialFormState = {
   email: "",
@@ -33,6 +36,8 @@ function LoginForm() {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
+  const { setProfile } = useUser();
+  const router = useRouter();
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -47,19 +52,38 @@ function LoginForm() {
   //   },
   // });
 
-  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-    startTransition(async () => {
+  const onSubmit = async (values: z.infer<typeof LoginSchema>) => {
+    startTransition(() => {
       setError("");
       setSuccess("");
       setLoading(true);
-      await LoginUser(values, callbackUrl).then((data) => {
-        setTimeout(() => {
-          setError(data.error);
-          setSuccess(data.success);
-          setLoading(false);
-        }, 2000);
-      });
     });
+
+    try {
+      const data = await LoginUser(values);
+
+      startTransition(async () => {
+        console.log("data", data.user);
+        if (data.status === 400) {
+          setError(data.message);
+          setLoading(false);
+          return;
+        }
+        // setIsAuthenticated(true);
+        setProfile(data.user);
+        setError("");
+        setSuccess("Login success");
+        setLoading(false);
+        await SetToken(data);
+        router.push("/");
+      });
+    } catch (error) {
+      startTransition(() => {
+        setError("Login failed");
+        setSuccess("");
+        setLoading(false);
+      });
+    }
   };
   return (
     <CardWrapper

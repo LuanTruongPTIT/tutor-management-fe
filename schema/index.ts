@@ -25,17 +25,17 @@ export const RegisterSchema = z.object({
 });
 
 export const AboutTutorSchema = z.object({
-  firstName: z.string().max(20, {
+  firstName: z.string().min(1, {
     message: "Max 20 characters required",
   }),
-  lastName: z.string().max(20, {
+  lastName: z.string().min(1, {
     message: "Max 20 characters required",
   }),
   email: z.string().email({
     message: "Email is required",
   }),
-  phone: z.string().max(10, {
-    message: "must 10 characters required",
+  phone: z.string().min(10).max(10, {
+    message: "must have 10 characters required",
   }),
   isAge18: z.boolean().refine((value) => value === true, {
     message: "isAge18 is required",

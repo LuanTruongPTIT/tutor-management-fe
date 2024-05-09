@@ -3,7 +3,7 @@ import { UserClient } from "@/components/tables/user-tables/client";
 import Breadcrumb from "@/components/ui/breadcrumb";
 
 import { students } from "@/constants/data";
-const breadcrumbItems = [{ title: "Tutor", link: "/dashboard/user" }];
+const breadcrumbItems = [{ title: "Student", link: "/admin/student" }];
 export default function page() {
   return (
     <>

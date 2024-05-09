@@ -99,7 +99,7 @@ const languages = [
   { label: "3", value: 3 },
   { label: "4", value: 4 },
   { label: "5", value: 5 },
-  { label: " 6", value: 6 },
+  { label: "6", value: 6 },
   { label: "7", value: 7 },
 ] as const;
 export const AvabilitySchema = z.object({
@@ -205,8 +205,8 @@ export function MultiSelect() {
   );
 
   async function processData(data: z.infer<typeof AvabilitySchema>) {
-    data.subject = selected.map((framework) => framework.value);
-    data.teachArea = selectedSubject.map((subject) => subject.value);
+    data.subject = selectedSubject.map((framework) => framework.value);
+    data.teachArea = selected.map((subject) => subject.value);
     dispatch(setCurrentSteps(currentStep + 1));
     dispatch(updateFormData(data));
 
@@ -287,7 +287,7 @@ export function MultiSelect() {
                                     e.preventDefault();
                                     e.stopPropagation();
                                   }}
-                                  onSelect={(value) => {
+                                  onSelect={(value) => {g
                                     setInputValue("");
                                     setSelectedSubject((prev) => [
                                       ...prev,

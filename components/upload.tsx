@@ -13,8 +13,10 @@ import { useState } from "react";
 export default function UploadMulti() {
   const [fileStates, setFileStates] = useState<FileState[]>([]);
   const [urls, setUrls] = useState<string[]>([]);
-  const { edgestore } = useEdgeStore();
   const dispatch = useAppDispatch();
+
+  const { edgestore } = useEdgeStore();
+
   function updateFileProgress(key: string, progress: FileState["progress"]) {
     setFileStates((fileStates) => {
       const newFileStates = structuredClone(fileStates);
@@ -53,8 +55,11 @@ export default function UploadMulti() {
                   },
                 });
                 setUrls([...urls, res.url]);
-                dispatch(updateFormData({ url_certification: res.url }));
-                console.log(res);
+                dispatch(
+                  updateFormData({
+                    url_certification: [...urls, res.url],
+                  })
+                );
               } catch (err) {
                 updateFileProgress(addedFileState.key, "ERROR");
               }

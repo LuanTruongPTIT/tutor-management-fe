@@ -10,7 +10,7 @@ import ConfirmSubmit from "./StepForms/ConfirmSubmit";
 
 export default function StepForm() {
   const currentStep = useAppSelector((store) => store.onboarding.currentStep);
-  console.log(currentStep);
+
   function renderFormByStep(step: number) {
     if (step === 1) {
       return <AboutForm />;
@@ -25,7 +25,6 @@ export default function StepForm() {
     if (step === 4) {
       return <ProfileDescription />;
     }
-
     if (step === 5) {
       return <AvaliabilityForm />;
     }

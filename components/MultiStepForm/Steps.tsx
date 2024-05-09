@@ -9,7 +9,7 @@ export interface IStep {
 export default function Steps({ steps }: { steps: IStep[] }) {
   // const { number, title } = step;
   return (
-    <div className="rounded-lg col-span-full md:col-span-4 bg-[#fe9fc3] p-10 flex flex-row justify-between md:flex-col md:justify-start gap-6 flex-wrap ">
+    <div className="rounded-lg col-span-full md:col-span-4 bg-[#fe9fc3]  p-10 flex flex-row bg-[url('/images/bg-sidebar-mobile.svg')] sm:bg-[url('/images/bg-sidebar-desktop.svg')] justify-between md:flex-col md:justify-start gap-6 flex-wrap ">
       {steps.map((step, i) => {
         return <Step key={i} step={step} />;
       })}

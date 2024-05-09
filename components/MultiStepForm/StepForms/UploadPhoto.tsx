@@ -69,13 +69,9 @@ export default function UploadPhoto() {
               onProgressChange: (progress) => {
                 console.log("progress", progress);
                 setProgress(progress);
-
-                // if (progress === 100) {
-                //   dispatch(setCurrentSteps(currentStep + 1));
-                // }
               },
             });
-            // save your data here
+
             setUrls({
               url: res.url,
               thumbnailUrl: res.thumbnailUrl,
@@ -86,16 +82,6 @@ export default function UploadPhoto() {
       >
         Upload
       </Button>
-      {urls?.url && (
-        <Link href={urls.url} target="_blank">
-          URL
-        </Link>
-      )}
-      {urls?.thumbnailUrl && (
-        <Link href={urls.thumbnailUrl} target="_blank">
-          THUMBNAIL
-        </Link>
-      )}
       <div className="w-full pt-[60px] pr-[70px]  ">
         <NavButtons isCheck={true} />
       </div>

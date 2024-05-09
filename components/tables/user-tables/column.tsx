@@ -25,20 +25,28 @@ export const columns: ColumnDef<User>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "name",
-    header: "NAME",
+    accessorKey: "id",
+    header: "Id",
   },
   {
-    accessorKey: "company",
-    header: "COMPANY",
+    accessorKey: "subject",
+    header: "Subject",
   },
   {
-    accessorKey: "role",
-    header: "ROLE",
+    accessorKey: "teacher",
+    header: "Teacher",
   },
   {
-    accessorKey: "status",
-    header: "STATUS",
+    accessorKey: "attendance",
+    header: "Attendance",
+  },
+  {
+    accessorKey: "start_date",
+    header: "Start Date",
+  },
+  {
+    accessorKey: "end_date",
+    header: "End Date",
   },
   {
     id: "actions",

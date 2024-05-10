@@ -37,14 +37,13 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ReactQueryClientProvider>
-          <Toaster />
-          <ToastContainer />
           <EdgeStoreProvider>
             <ReduxProvider>
               {/* <Providers> */}
               <StreamVideoProvider>
                 <NextUIProvider>
                   <UserProvider inititalAccessToken={sessionToken?.value}>
+                    <Toaster />
                     <Suspense fallback={<Loading />}>{children}</Suspense>
                   </UserProvider>
                 </NextUIProvider>

@@ -41,6 +41,7 @@ import { toast } from "react-toastify";
 import { BeatLoader } from "react-spinners";
 import Link from "next/link";
 import Image from "next/image";
+import { useMutation } from "@tanstack/react-query";
 const AvailabilitySchema = z.object({
   salary: z.string(),
 });
@@ -49,7 +50,25 @@ export default function AvailabilityForm() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [values, setValues] = React.useState([]);
   const [isPending, startTransition] = React.useTransition();
-  console.log("values", typeof values, values);
+  const createRegisterTutor = useMutation({
+    mutationFn: async (data: any) => {
+      try {
+        const result = await tutorApiRequest.RegisterTutor(formData);
+        return result;
+      } catch (error: any) {
+        throw error;
+      }
+    },
+    onSuccess: async () => {
+      setIsLoading(false);
+      setIsSuccess(true);
+    },
+    onError: (error: any) => {
+      console.log(error);
+      setIsLoading(false);
+      toast.error("An error occurred. Please try again later.");
+    },
+  });
   const form = useForm<z.infer<typeof AvailabilitySchema>>({
     resolver: zodResolver(AvailabilitySchema),
     defaultValues: {
@@ -67,25 +86,8 @@ export default function AvailabilityForm() {
       salary: data.salary,
     };
     dispatch(updateFormData(data));
-
-    console.log("formData", formData);
-    try {
-      setIsLoading(true);
-      const result = await tutorApiRequest.RegisterTutor(formData);
-      startTransition(() => {
-        if ((result.status = 200)) {
-          setTimeout(() => {
-            setIsLoading(false);
-            setIsSuccess(true);
-          }, 2000);
-        }
-        if ((result.status = 400)) {
-          toast.error(data.message);
-        }
-      });
-    } catch (error) {
-      toast.error("Something went wrong");
-    }
+    setIsLoading(true);
+    createRegisterTutor.mutate(formData);
   }
   return (
     <>

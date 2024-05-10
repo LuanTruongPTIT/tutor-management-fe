@@ -10,11 +10,12 @@ import { useAppDispatch, useAppSelector } from "@/lib/store";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { NavButton, totalSteps } from "./nav-button";
-import { steps } from "../../page";
+
 import { setActiveSteps, setCompleted, updateFormData } from "@/lib/slices";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { steps } from "../page";
 
 export const ProfileSchema = z.object({
   bio: z.string().max(500, { message: "Bio must be less than 500 characters" }),

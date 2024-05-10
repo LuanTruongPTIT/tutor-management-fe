@@ -18,7 +18,7 @@ import { NavButton, totalSteps } from "./nav-button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useAppDispatch, useAppSelector } from "@/lib/store";
 import { setActiveSteps, setCompleted } from "@/lib/slices";
-import { steps } from "../../page";
+import { steps } from "../page";
 
 export default function AboutForm() {
   const dispatch = useAppDispatch();

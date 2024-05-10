@@ -31,7 +31,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/store";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { steps } from "../../page";
+import { steps } from "../page";
 import { setActiveSteps, setCompleted, updateFormData } from "@/lib/slices";
 import { NavButton, totalSteps } from "./nav-button";
 import { Button } from "@/components/ui/button";

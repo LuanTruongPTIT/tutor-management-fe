@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation";
-import { deleteProfileLS, getAccessToken } from "./utils/auth.utils";
 
 type CustomOptions = Omit<RequestInit, "method"> & {
   baseUrl?: string | undefined;

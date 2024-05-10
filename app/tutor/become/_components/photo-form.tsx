@@ -10,7 +10,7 @@ import { setActiveSteps, setCompleted, updateFormData } from "@/lib/slices";
 import { Separator } from "@/components/ui/separator";
 import { SingleImageDropzone } from "@/components/single-image-dropzone";
 import { useState } from "react";
-import { steps } from "../page";
+import { steps } from "../../page";
 import { useEdgeStore } from "@/lib/edgestore";
 import { Button } from "@/components/ui/button";
 import { Check, GraduationCap, School } from "lucide-react";

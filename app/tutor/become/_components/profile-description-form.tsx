@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/store";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { NavButton, totalSteps } from "./nav-button";
-import { steps } from "../page";
+import { steps } from "../../page";
 import { setActiveSteps, setCompleted, updateFormData } from "@/lib/slices";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";

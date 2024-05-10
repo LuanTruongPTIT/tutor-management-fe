@@ -1,14 +1,16 @@
-// import Sidebar from "@/components/layout/sidebar";
-import React from "react";
-import Providers from "@/redux/Providers";
-import Header from "@/components/header/Header";
-function TechLayout({ children }: { children: React.ReactNode }) {
+import dynamic from "next/dynamic";
+
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const ReduxProvider = dynamic(() => import("@/lib/providers"), {
+    ssr: false,
+  });
   return (
     <>
-      <Header />
-      {children}
+      <ReduxProvider>{children}</ReduxProvider>
     </>
   );
 }
-
-export default TechLayout;

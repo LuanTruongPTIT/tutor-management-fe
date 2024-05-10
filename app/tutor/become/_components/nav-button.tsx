@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { steps } from "../page";
+import { steps } from "../../page";
 import { useAppDispatch, useAppSelector } from "@/lib/store";
 import { setActiveSteps, setCompleted, setIsBack } from "@/lib/slices";
 

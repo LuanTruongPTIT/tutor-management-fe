@@ -19,7 +19,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/store";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { setActiveSteps, setCompleted } from "@/lib/slices";
-import { steps } from "../page";
+
 import {
   Popover,
   PopoverContent,
@@ -34,6 +34,7 @@ import {
   CommandItem,
 } from "@/components/ui/command";
 import { Check, ChevronsUpDown } from "lucide-react";
+import { steps } from "../page";
 
 export const EducationSchema = z
   .object({

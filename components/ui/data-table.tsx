@@ -23,7 +23,7 @@ import { ScrollArea, ScrollBar } from "./scroll-area";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  searchKey: string;
+  searchKey?: string;
 }
 
 export function DataTable<TData, TValue>({
@@ -40,14 +40,16 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      <Input
-        placeholder={`Search ${searchKey}...`}
-        value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
-        onChange={(event) =>
-          table.getColumn(searchKey)?.setFilterValue(event.target.value)
-        }
-        className="w-full md:max-w-sm"
-      />
+      {searchKey && (
+        <Input
+          placeholder={`Search ${searchKey}...`}
+          value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn(searchKey)?.setFilterValue(event.target.value)
+          }
+          className="w-full md:max-w-sm"
+        />
+      )}
       {/* h-[calc(80vh-220px)] */}
       <ScrollArea className="rounded-md border mt-8">
         <Table className="relative">

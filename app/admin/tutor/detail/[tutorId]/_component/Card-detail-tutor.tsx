@@ -17,6 +17,9 @@ import Link from "next/link";
 import { Tags } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import NextItemTabs from "@/components/material/next-item";
+import TableTutorCourseClass from "./table-course";
+import StepSchedule from "./step-schedule";
+import { TutorCourseClass } from "@/schema";
 
 function DemoContainer({
   className,
@@ -32,105 +35,143 @@ function DemoContainer({
     />
   );
 }
-
-export default function CardDetailTutor() {
+interface CardDetailTutorProps {
+  data: any;
+}
+export default function CardDetailTutor({ data }: any) {
+  console.log("data", data);
+  const class_tutor =
+    data?.class_tutor && (data.class_tutor as TutorCourseClass[]);
+  const joined =
+    data?.createdAt &&
+    new Date(data.createdAt).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  const schedules: any[] = [];
+  class_tutor &&
+    Promise.all(
+      class_tutor.map(async (item_class) => {
+        item_class.schedule &&
+          item_class.schedule.map((item) => {
+            console.log("item", item);
+            const item_plain = {
+              ...item,
+              class_name: item_class.room,
+              students: item_class.students,
+            };
+            schedules.push(item_plain);
+          });
+      })
+    );
+  const schedule_sort = schedules.sort((a, b) => {
+    return new Date(a.start_date).getTime() - new Date(b.start_date).getTime();
+  });
+  console.log("schedule_sort", schedule_sort);
   return (
-    <Tabs defaultValue="info" className="">
+    <Tabs defaultValue="info" className="w-full">
       <TabsList className="w-[300px] grid grid-cols-2">
         <TabsTrigger value="info">General Info</TabsTrigger>
         <TabsTrigger value="password">Tutor&apos;s Categories</TabsTrigger>
       </TabsList>
       <TabsContent
         value="info"
-        className="w-full justify-center flex flex-cols"
+        className="w-full justify-around flex flex-row px-7"
       >
-        <Card className="w-[300px] my-5">
+        <Card className="w-[400px] my-5 max-h-[700px]">
           <CardHeader>
             <CardTitle>About tutor Luan Truong</CardTitle>
           </CardHeader>
           <CardContent className="flex items-center flex-col space-y-2">
             <Avatar className="h-[100px] w-[100px]">
-              <AvatarImage src="/components.jpeg" alt="@shadcn" width={300} />
+              <AvatarImage
+                src={data?.imagePhoto && data.imagePhoto}
+                alt="@shadcn"
+                width={300}
+              />
             </Avatar>
-            <span>@luantruong</span>
+            <span>{data?.fullName ? data.fullName : ""}</span>
             <span className="text-gray-500">tutor</span>
-            <Separator />
           </CardContent>
-          <CardContent>
-            <div className="pb-7">
-              <h2 className="text-sm leading-6">Address</h2>
-              <span className="text-sm text-gray-500">
-                17no9 Thành phố Thủ Đức{" "}
-              </span>
+          <div className="flex w-[90%] flex-col justify-center space-y-2 gap-4">
+            <h2 className="pl-5">Details</h2>
+            <Separator className="ml-5" />
+          </div>
+
+          <CardContent className="pt-7">
+            <div className="pb-7 space-y-2 flex flex-col gap-y-2 items-start">
+              <div className="flex items-center flex-row gap-2">
+                <h2 className="text-sm leading-6">Email:</h2>
+                <span className="text-sm text-gray-500">
+                  {data?.email ? data.email : ""}
+                </span>
+              </div>
+              <div className="flex items-center flex-row gap-2">
+                <h2 className="text-sm leading-6">Phone:</h2>
+                <span className="text-sm text-gray-500">
+                  {data?.phone_number ? data.phone_number : "N/A"}
+                </span>
+              </div>
+              <div className="flex items-center flex-row gap-2">
+                <h2 className="text-sm leading-6">Address:</h2>
+                <span className="text-sm text-gray-500">
+                  {data?.address ? data.address : ""}
+                </span>
+              </div>
+              <div className="flex items-center flex-row gap-2">
+                <h2 className="text-sm leading-6">Country:</h2>
+                <span className="text-sm text-gray-500">
+                  {data?.country ? data.country : ""}
+                </span>
+              </div>
+              <div className="flex items-center flex-row gap-2">
+                <h2 className="text-sm leading-6">Status:</h2>
+                <span className="text-sm text-gray-500">
+                  {data?.status ? data.status : ""}
+                </span>
+              </div>
+              <div className="flex items-center flex-row gap-2">
+                <h2 className="text-sm leading-6">Role:</h2>
+                <span className="text-sm text-gray-500">Tutor</span>
+              </div>
             </div>
-            <div className="pb-7">
-              <h2 className="text-sm leading-6">Address</h2>
-              <span className="text-sm text-gray-500">
-                17no9 Thành phố Thủ Đức{" "}
-              </span>
-            </div>
-            <div className="pb-10">
-              <h2 className="text-sm leading-6">Address</h2>
-              <span className="text-sm text-gray-500">
-                17no9 Thành phố Thủ Đức{" "}
-              </span>
-            </div>
+
             <Separator />
             <div className="pt-5">
               <h2 className="text-sm leading-6">Created / joined at</h2>
-              <span className="text-sm text-gray-500 ">Jan 28, 2021</span>
+              <span className="text-sm text-gray-500 ">{joined}</span>
             </div>
           </CardContent>
         </Card>
-        <Card className="w-[900px] p-10 my-5 ml-5">
-          <div className="grid grid-cols-2 gap-4 pb-6">
-            <div className="grid gap-2">
-              <Label htmlFor="fullname">
-                FullName<span className="text-red-500">(*)</span>
-              </Label>
-              <Input value="Truong Dinh Kim Luan" />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="username">
-                UserName<span className="text-red-500">(*)</span>
-              </Label>
-              <Input value="@luantruong" />
-            </div>
-          </div>
+        <div>
+          <Card className="flex flex-col justify-start p-6 my-5 ml-5">
+            <CardTitle>Background</CardTitle>
+            {/* </CardHeader> */}
+            <CardContent className="pt-[20px]">
+              <div className="flex flex-cols pt-3">
+                <NextItemTabs data={data?.activities ? data.activities : []} />
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="w-[900px] p-6 my-5 ml-5">
+            {/* <CardHeader> */}
+            <CardTitle>Class</CardTitle>
+            {/* </CardHeader> */}
 
-          <div className="grid grid-cols-2 gap-4 pb-6">
-            <div className="grid gap-2">
-              <Label htmlFor="email">
-                Email<span className="text-red-500">(*)</span>
-              </Label>
-              <Input disabled={true} value="luan@gmail.com" />
+            <div className="flex flex-col justify-start w-full">
+              <TableTutorCourseClass data={class_tutor ? class_tutor : []} />
             </div>
-            <div className="grid gap-2">
-              <Label htmlFor="university">University</Label>
-              <Input value="" />
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4 pb-6">
-            <div className="grid gap-2">
-              <Label htmlFor="degree">Degree</Label>
-              <Input value="" />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="experience">Experience</Label>
-              <Input value="1 month" />
-            </div>
-          </div>
-          <div className="flex flex-row gap-1 pb-8">
-            <Tags />
-            <Link href="https://api.pinlearn.info/documents/k-t-qu--h-c-t-p---c-ng-th-ng-tin---o-t-o-E0o04.pdf">
-              <h2 className="italic"> Cert Document </h2>
-            </Link>
-          </div>
-          <Separator />
-          <div className="flex flex-cols pt-3">
-            <NextItemTabs />
-          </div>
-        </Card>
+          </Card>
+          <Card className="w-[900px] flex flex-col justify-start p-6 my-5 ml-5">
+            {/* <CardHeader> */}
+            <CardTitle>User Activity Timeline</CardTitle>
+            {/* </CardHeader> */}
+            <CardContent className="pt-[40px]">
+              <StepSchedule data={schedule_sort} />
+            </CardContent>
+          </Card>
+        </div>
       </TabsContent>
       <TabsContent value="password">
         <div>luantruong</div>

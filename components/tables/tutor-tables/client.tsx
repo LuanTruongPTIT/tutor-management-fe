@@ -7,17 +7,20 @@ import { columns } from "./column";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Plus } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { adminApiRequest } from "@/apiRequest/admin";
 interface ProductClientProps {
-  data: Tutor[];
+  data?: Tutor[] | null;
 }
 export const TutorClient: React.FC<ProductClientProps> = ({ data }) => {
   const router = useRouter();
+
   return (
     <>
       <div className="flex items-start justify-between">
         <Heading
           title={`Tutors (${data?.length ?? 0})`}
-          description="Manage student (Client side table functionalities.)"
+          description="Manage tutor"
         />
         <Button
           className="text-xs md:text-sm"
@@ -27,7 +30,7 @@ export const TutorClient: React.FC<ProductClientProps> = ({ data }) => {
         </Button>
       </div>
       <Separator />
-      <DataTable searchKey="name" columns={columns} data={data} />
+      <DataTable searchKey="name" columns={columns} data={data ?? []} />
     </>
   );
 };

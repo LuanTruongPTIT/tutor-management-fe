@@ -48,3 +48,14 @@ export const EducationSchema = z.object({
   degreeType: z.string(),
   specialization: z.string(),
 });
+
+export type TutorCourseClass = {
+  room: string;
+  start_date: string;
+  end_date: string;
+  course: string;
+  status: string;
+  count_students: number;
+  schedule?: any[];
+  students?: any[];
+};

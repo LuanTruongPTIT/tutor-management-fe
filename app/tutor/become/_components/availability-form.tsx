@@ -45,11 +45,15 @@ import { useMutation } from "@tanstack/react-query";
 const AvailabilitySchema = z.object({
   salary: z.string(),
 });
+
 export default function AvailabilityForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [values, setValues] = React.useState([]);
   const [isPending, startTransition] = React.useTransition();
+  const onRequestError = (error: any) => {
+    return toast.error("An error occurred. Please try again.");
+  };
   const createRegisterTutor = useMutation({
     mutationFn: async (data: any) => {
       try {
@@ -63,12 +67,9 @@ export default function AvailabilityForm() {
       setIsLoading(false);
       setIsSuccess(true);
     },
-    onError: (error: any) => {
-      console.log(error);
-      setIsLoading(false);
-      toast.error("An error occurred. Please try again later.");
-    },
+    onError: onRequestError,
   });
+
   const form = useForm<z.infer<typeof AvailabilitySchema>>({
     resolver: zodResolver(AvailabilitySchema),
     defaultValues: {

@@ -54,8 +54,12 @@ export const PhotoForm = () => {
   const activeStep = useAppSelector((store) => store.onboarding.activeStep);
   const completed = useAppSelector((store) => store.onboarding.completed);
   // data: z.infer<typeof photoSchema>;
-  async function processData() {
-    console.log("processData");
+  async function processData(data: PhotoFormValues) {
+    if (!file) {
+      console.log("You must upload a photo");
+      return;
+    }
+
     const completedSteps = () => {
       return Object.keys(completed).length;
     };
@@ -101,14 +105,22 @@ export const PhotoForm = () => {
                           <SingleImageDropzone
                             width={200}
                             height={150}
+                            // value={field.value}
                             value={!file ? values.imgUrl : file}
                             dropzoneOptions={{
                               maxSize: 1024 * 1024 * 1, // 1MB
                             }}
                             onChange={(file) => {
                               setFile(file);
+                              // field.onChange;
                             }}
+                            // onChange={field.onChange}
                           />
+                          {/* <FileUpload
+                            onChange={field.onChange}
+                            value={field.value as any}
+                            onRemove={field.onChange}
+                          /> */}
                           <div className="flex flex-col gap-y-4 items-start justify-start">
                             <h1 className="text-2xl text-[#121117] font-bold leading-8">
                               {values.lastName} {values.firstName}

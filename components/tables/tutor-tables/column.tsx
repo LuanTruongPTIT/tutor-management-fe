@@ -4,6 +4,7 @@ import { CellAction } from "./cell-action";
 import { Student, Tutor, User } from "@/constants/data";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Chip } from "@nextui-org/chip";
 // export type Tutor = {
 //   id: number;
 //   name: string;
@@ -39,43 +40,66 @@ export const columns: ColumnDef<Tutor>[] = [
     header: "Id",
   },
   {
-    accessorKey: "photo",
+    accessorKey: "imagePhoto",
     header: "Photo",
     cell: ({ row }) => {
       return (
         <Avatar>
-          <AvatarImage src={row.original.photo} alt="@shadcn" />
+          <AvatarImage src={row.original.imagePhoto} alt="@shadcn" />
         </Avatar>
       );
     },
   },
   {
-    accessorKey: "name",
+    accessorKey: "fullName",
     header: "Name",
   },
   {
-    accessorKey: "verified",
-    header: "Verified",
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
-  },
-  {
-    accessorKey: "gender",
-    header: "Gender",
-  },
-  {
-    accessorKey: "email",
-    header: "Email",
+    accessorKey: "phone_number",
+    header: "Phone Number",
   },
   {
     accessorKey: "address",
     header: "Address",
   },
   {
-    accessorKey: "phone",
-    header: "Phone",
+    accessorKey: "city",
+    header: "City",
+  },
+
+  {
+    accessorKey: "country",
+    header: "Country",
+  },
+  {
+    accessorKey: "role",
+    header: "Role",
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+    cell: ({ row }) => {
+      // console.log(row.original.status);
+      return (
+        <span className="flex space-x-2">
+          {row.original.status === "active" && (
+            <Chip color="success" variant="bordered">
+              {row.original.status}
+            </Chip>
+          )}
+          {row.original.status === "inactive" && (
+            <Chip color="warning" variant="bordered">
+              {row.original.status}
+            </Chip>
+          )}
+          {row.original.status === "blocked" && (
+            <Chip color="danger" variant="bordered">
+              {row.original.status}
+            </Chip>
+          )}
+        </span>
+      );
+    },
   },
   {
     id: "actions",

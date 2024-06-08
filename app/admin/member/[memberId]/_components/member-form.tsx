@@ -68,6 +68,10 @@ export const MemberForm: React.FC<MemberFormProps> = ({ initialData }) => {
     resolver: zodResolver(formSchema),
     defaultValues,
   });
+  const onSubmit = async (data: MemberFormValues) => {
+    console.log(data);
+  };
+
   return (
     <>
       <div className="flex items-center justify-between">
@@ -75,7 +79,10 @@ export const MemberForm: React.FC<MemberFormProps> = ({ initialData }) => {
       </div>
       <Separator />
       <Form {...form}>
-        <form className="space-y-8 w-full">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-8 w-full"
+        >
           <FormField
             control={form.control}
             name="imgUrl"

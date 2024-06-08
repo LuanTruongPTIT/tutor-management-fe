@@ -26,6 +26,7 @@ const queryClient = new QueryClient();
 const ReduxProvider = dynamic(() => import("@/redux/Providers"), {
   ssr: false,
 });
+
 export default async function RootLayout({
   children,
 }: {

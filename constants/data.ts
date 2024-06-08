@@ -41,21 +41,11 @@ export const StudentsCourses: CoursesStudent[] = [
 ];
 export type Employee = {
   id: number;
-  first_name: string;
-  last_name: string;
+  fullName: string;
+  status: string;
   email: string;
-  phone: string;
-  gender: string;
-  date_of_birth: string; // Consider using a proper date type if possible
-  street: string;
-  city: string;
-  state: string;
-  country: string;
-  zipcode: string;
-  longitude?: number; // Optional field
-  latitude?: number; // Optional field
-  job: string;
-  profile_picture?: string | null; // Profile picture can be a string (URL) or null (if no picture)
+  role: string;
+  createdAt: Date;
 };
 //  icon: Inbox,
 export const navItems: NavItem[] = [
@@ -88,6 +78,12 @@ export const navItems: NavItem[] = [
     href: "/admin/member",
     icon: "user",
     label: "members",
+  },
+  {
+    title: "Employee",
+    href: "/admin/employee",
+    icon: "user",
+    label: "employee",
   },
   {
     title: "Profile",
@@ -138,61 +134,17 @@ export type Student = {
 
 export type Tutor = {
   id: number;
-  name: string;
-  photo: string;
-  verified: boolean;
+  fullName: string;
+  imagePhoto: string;
   status: string;
   address: string;
-  phone: string;
+  phone_number: string;
   email: string;
-  gender: string;
+  city: string;
+  role: string;
+  country: string;
 };
-export const tutors: Tutor[] = [
-  {
-    id: 1,
-    name: "Truong Luan",
-    photo: "/golang2.png",
-    verified: true,
-    status: "active",
-    address: "17 street no.9",
-    phone: "0822036246",
-    email: "example@gmail.com",
-    gender: "Male",
-  },
-  {
-    id: 2,
-    name: "Truong Luan",
-    photo: "/golang2.png",
-    verified: true,
-    status: "active",
-    address: "17 street no.9",
-    phone: "0822036246",
-    email: "example@gmail.com",
-    gender: "Male",
-  },
-  {
-    id: 3,
-    name: "Truong Luan",
-    photo: "/golang2.png",
-    verified: true,
-    status: "active",
-    address: "17 street no.9",
-    phone: "0822036246",
-    email: "example@gmail.com",
-    gender: "Male",
-  },
-  {
-    id: 4,
-    name: "Truong Luan",
-    photo: "/golang2.png",
-    verified: true,
-    status: "active",
-    address: "17 street no.9",
-    phone: "0822036246",
-    email: "example@gmail.com",
-    gender: "Male",
-  },
-];
+
 export const students: Student[] = [
   {
     id: 1,

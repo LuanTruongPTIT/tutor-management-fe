@@ -30,8 +30,20 @@ export default function Page() {
     queryKey: ["tutor"],
     queryFn: adminApiRequest.GetAllTutors,
   });
-  const tutors = (data as any)?.data.tutor as Tutor[];
+  const tutors = ((data as any)?.data?.tutor as Tutor[])
+    ? (data as any)?.data?.tutor
+    : [];
   if (isLoading) {
+  }
+  if (error) {
+    <>
+      <Suspense fallback={<Loading />}>
+        <div className="flex-1 space-y-4  p-4 md:p-8 pt-6">
+          <Breadcrumb items={breadcrumbItems} />
+          <TutorClient data={tutors} />
+        </div>
+      </Suspense>
+    </>;
   }
   return (
     <>

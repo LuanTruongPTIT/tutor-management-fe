@@ -20,16 +20,27 @@ import { adminApiRequest } from "@/apiRequest/admin";
 import { toast } from "sonner";
 import { EyeSlashFilledIcon } from "./icon/EyeSlashFilledIcon";
 import { EyeFilledIcon } from "./icon/EyeFilledIcon";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const formCreateTutor = z.object({
   email: z.string().email(),
   password: z.string().min(10),
-  first_name: z.string(),
-  last_name: z.string(),
+  firstName: z.string(),
+  lastName: z.string(),
   address: z.string(),
   city: z.string(),
   country: z.string(),
   phone_number: z.string(),
+  gender: z.string().optional(),
+  parent_name: z.string().optional(),
+  level: z.string().optional(),
+  date_of_birth: z.string().optional(),
 });
 
 export default function FormCreateStudent() {
@@ -57,7 +68,7 @@ export default function FormCreateStudent() {
   return (
     <div className="flex flex-row items-start h-[800px] justify-center gap-7">
       <ImagePhoto setUrls={setUrls} />
-      <Card className=" max-h-[500px] w-[800px]">
+      <Card className=" max-h-[800px] w-[800px]">
         <CardContent className="p-7">
           {/* <div className="flex flex-row"> */}
           <Form {...form}>
@@ -117,7 +128,7 @@ export default function FormCreateStudent() {
 
                 <FormField
                   control={form.control}
-                  name="first_name"
+                  name="firstName"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
@@ -134,7 +145,7 @@ export default function FormCreateStudent() {
                 />
                 <FormField
                   control={form.control}
-                  name="last_name"
+                  name="lastName"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
@@ -210,6 +221,67 @@ export default function FormCreateStudent() {
                           type="text"
                           variant="bordered"
                           label="Phone Number"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="gender"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue="Male"
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Gender" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="Male">Male</SelectItem>
+                            <SelectItem value="Female">Female</SelectItem>
+                            <SelectItem value="Female">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="date_of_birth"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input
+                          type="date"
+                          variant="bordered"
+                          label="Date of Birth"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="parent_name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input
+                          type="text"
+                          variant="bordered"
+                          label="Parent"
                           {...field}
                         />
                       </FormControl>

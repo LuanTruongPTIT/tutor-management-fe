@@ -13,4 +13,7 @@ export const adminApiRequest = {
   CreateTutorByAdmin: (data: any) => {
     return http.post("/api/admin/create-tutor-by-admin", data);
   },
+  GetAllStudentByAdmin: () => {
+    return http.get("/api/admin/get-all-student");
+  },
 };

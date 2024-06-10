@@ -22,6 +22,8 @@ import {
 } from "@/components/ui/table";
 import { Tutor, users } from "@/constants/data";
 import { useQuery } from "@tanstack/react-query";
+import { Suspense } from "react";
+import Loading from "@/app/loading";
 const breadcrumbItems = [{ title: "Tutor", link: "/admin/tutor" }];
 export default function Page() {
   const { data, isLoading, error } = useQuery({
@@ -33,10 +35,12 @@ export default function Page() {
   }
   return (
     <>
-      <div className="flex-1 space-y-4  p-4 md:p-8 pt-6">
-        <Breadcrumb items={breadcrumbItems} />
-        <TutorClient data={tutors} />
-      </div>
+      <Suspense fallback={<Loading />}>
+        <div className="flex-1 space-y-4  p-4 md:p-8 pt-6">
+          <Breadcrumb items={breadcrumbItems} />
+          <TutorClient data={tutors} />
+        </div>
+      </Suspense>
     </>
   );
 }

@@ -1,8 +1,9 @@
 "use client";
-import React from "react";
+import React, { Suspense } from "react";
 
 import BreadCrumb from "@/components/ui/breadcrumb";
 import Applications from "./_components/application";
+import Loading from "@/app/loading";
 
 export default function Page() {
   // return (
@@ -13,10 +14,14 @@ export default function Page() {
     // { title: "Detail", link: "/admin/student/detail" },
   ];
   return (
-    <div className="flex h-full flex-col flex-1 space-y-8 p-8 md:flex">
-      <BreadCrumb items={breadCrumbItems} />
-      {/* <CardDetailStudent /> */}
-      <Applications />
-    </div>
+    <>
+      <Suspense fallback={<Loading />}>
+        <div className="flex h-full flex-col flex-1 space-y-8 p-8 md:flex">
+          <BreadCrumb items={breadCrumbItems} />
+          {/* <CardDetailStudent /> */}
+          <Applications />
+        </div>
+      </Suspense>
+    </>
   );
 }

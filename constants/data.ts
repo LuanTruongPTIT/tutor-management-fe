@@ -92,14 +92,8 @@ export const navItems: NavItem[] = [
     label: "profile",
   },
   {
-    title: "Kanban",
-    href: "/admin/kanban",
-    icon: "kanban",
-    label: "kanban",
-  },
-  {
-    title: "Stream",
-    href: "/admin/stream",
+    title: "Metting",
+    href: "/admin/schedule",
     icon: "attendance",
     label: "attendance",
   },
@@ -110,26 +104,25 @@ export const navItems: NavItem[] = [
     label: "attendance",
   },
   {
-    title: "Meeting",
-    href: "/admin/meeting",
-    icon: "meeting",
-    label: "meeting",
+    title: "Room",
+    href: "/admin/room",
+    icon: "attendance",
+    label: "attendance",
   },
 ];
 
 export type Student = {
   id: number;
   name: string;
-  school: string;
   role: string;
-  verified: boolean;
   status: string;
-  code: string;
-  class: string;
-  mother: string;
+  parent: string;
   Gender: string;
   phone: string;
   address: string;
+  country: string;
+  join: Date;
+  imageUrl: string;
 };
 
 export type Tutor = {

@@ -142,6 +142,7 @@ const request = async <Response>(
   };
   if (!res.ok) {
     if (res.status === ENTITY_ERROR_STATUS) {
+      console.log("data", data);
       throw new EntityError(
         data as {
           status: 422;

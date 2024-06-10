@@ -1,8 +1,7 @@
 "use client";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@nextui-org/react";
-import { EyeSlashFilledIcon } from "./icon/EyeSlashFilledIcon";
-import { EyeFilledIcon } from "./icon/EyeFilledIcon";
+
 import React from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -19,6 +18,8 @@ import ImagePhoto from "./image-photo";
 import { a } from "@react-spring/web";
 import { adminApiRequest } from "@/apiRequest/admin";
 import { toast } from "sonner";
+import { EyeSlashFilledIcon } from "./icon/EyeSlashFilledIcon";
+import { EyeFilledIcon } from "./icon/EyeFilledIcon";
 
 const formCreateTutor = z.object({
   email: z.string().email(),
@@ -31,7 +32,7 @@ const formCreateTutor = z.object({
   phone_number: z.string(),
 });
 
-export default function FormCreateTutor() {
+export default function FormCreateStudent() {
   const [isVisible, setIsVisible] = React.useState(false);
   const [urls, setUrls] = React.useState("");
   const toggleVisibility = () => setIsVisible(!isVisible);

@@ -3,6 +3,7 @@ import { CellContext, ColumnDef } from "@tanstack/react-table";
 import { CellAction } from "./cell-action";
 import { Student, User } from "@/constants/data";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 export const columns: ColumnDef<Student>[] = [
   {
@@ -25,44 +26,40 @@ export const columns: ColumnDef<Student>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "name",
-    header: "NAME",
+    accessorKey: "fullName",
+    header: "Name",
   },
   {
-    accessorKey: "school",
-    header: "SCHOOL",
+    accessorKey: "imageUrl",
+    header: "Photo",
+    cell: ({ row }) => {
+      return (
+        <Avatar>
+          <AvatarImage src={row.original.imageUrl} alt="@shadcn" />
+        </Avatar>
+      );
+    },
+  },
+
+  {
+    accessorKey: "parent_name",
+    header: "Parent",
   },
   {
-    accessorKey: "role",
-    header: "ROLE",
+    accessorKey: "gender",
+    header: "Gender",
+  },
+  {
+    accessorKey: "phoneNumber",
+    header: "Phone",
   },
   {
     accessorKey: "status",
-    header: "STATUS",
+    header: "Status",
   },
   {
-    accessorKey: "code",
-    header: "CODE",
-  },
-  {
-    accessorKey: "class",
-    header: "CLASS",
-  },
-  {
-    accessorKey: "mother",
-    header: "MOTHER",
-  },
-  {
-    accessorKey: "Gender",
-    header: "GENDER",
-  },
-  {
-    accessorKey: "phone",
-    header: "PHONE",
-  },
-  {
-    accessorKey: "address",
-    header: "ADDRESS",
+    accessorKey: "join",
+    header: "Join",
   },
   {
     id: "actions",

@@ -15,7 +15,7 @@ export default function Page() {
     queryKey: ["student"],
     queryFn: adminApiRequest.GetAllStudentByAdmin,
   });
-  const student = ((data as any)?.data.student as Student[])
+  const student = ((data as any)?.data?.student as Student[])
     ? (data as any)?.data.student
     : [];
   console.log(student);
@@ -29,10 +29,12 @@ export default function Page() {
   if (error) {
     return (
       <>
-        <div className="flex-1 space-y-4  p-4 md:p-8 pt-6">
-          <Breadcrumb items={breadcrumbItems} />
-          <StudentClient data={student} />
-        </div>
+        <Suspense fallback={<Loading />}>
+          <div className="flex-1 space-y-4  p-4 md:p-8 pt-6">
+            <Breadcrumb items={breadcrumbItems} />
+            <StudentClient data={student} />
+          </div>
+        </Suspense>
       </>
     );
   }

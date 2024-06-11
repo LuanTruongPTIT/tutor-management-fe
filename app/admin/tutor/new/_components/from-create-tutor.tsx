@@ -48,8 +48,8 @@ export default function FormCreateTutor() {
       toast.success("Tutor created successfully");
     } catch (error: any) {
       console.log(error);
-      console.log(error.data);
-      toast.error(error.message);
+      console.log(error.payload.payload.message);
+      toast.error(error.payload.payload.message);
     }
   }
 

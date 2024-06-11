@@ -108,7 +108,7 @@ export const PhotoForm = () => {
                             // value={field.value}
                             value={!file ? values.imgUrl : file}
                             dropzoneOptions={{
-                              maxSize: 1024 * 1024 * 1, // 1MB
+                              maxSize: 1024 * 1024 * 5, // 1MB
                             }}
                             onChange={(file) => {
                               setFile(file);

@@ -150,26 +150,21 @@ const request = async <Response>(
         }
       );
     } else if (res.status === AUTHENTICATION_ERROR_STATUS) {
+      console.log("data", data);
       if (typeof window !== "undefined") {
-        if (!clientLogoutRequest) {
-          clientLogoutRequest = fetch("http://localhost:3000/api/auth/logout", {
-            method: "POST",
-            body: JSON.stringify({ force: true }),
-            headers: {
-              ...baseHeaders,
-            } as any,
-          });
-        }
-        await clientLogoutRequest;
-        localStorage.removeItem("profile");
-        clientLogoutRequest = null;
-        location.href = "/auth/login";
-      } else {
-        const accesstoken = (options?.headers as any)?.Authorization.split(
-          "Bearer"
-        )[1];
-
-        redirect(`/logout?accesstoken=${accesstoken}`);
+        // if (!clientLogoutRequest) {
+        //   clientLogoutRequest = fetch("http://localhost:3000/api/auth/logout", {
+        //     method: "POST",
+        //     body: JSON.stringify({ force: true }),
+        //     headers: {
+        //       ...baseHeaders,
+        //     } as any,
+        //   });
+        // }
+        // await clientLogoutRequest;
+        // localStorage.removeItem("profile");
+        // clientLogoutRequest = null;
+        // location.href = "/auth/login";
       }
     }
   }

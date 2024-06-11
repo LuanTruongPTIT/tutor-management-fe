@@ -32,7 +32,7 @@ const Navbar = () => {
 
   return (
     <div className={navbarClasses}>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center pl-3 gap-2">
         <Logo />
         <Menu />
       </div>

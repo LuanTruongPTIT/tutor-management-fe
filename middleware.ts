@@ -30,9 +30,12 @@ const adminPaths = [
   "/admin/tutor/[tutorId]",
 ];
 const authPaths = ["/auth/login", "/auth/register"];
+const publicPaths = ["/landing-page"];
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  console.log("pathname", pathname);
   const token = request.cookies.get("accesstoken")?.value;
+  console.log("token", token);
   const role = request.cookies.get("role")?.value;
   if (privatePaths.some((path) => pathname.startsWith(path)) && !token) {
     return NextResponse.redirect(new URL("/auth/login", request.url));
@@ -49,6 +52,10 @@ export function middleware(request: NextRequest) {
   }
 
   if (authPaths.some((path) => pathname.startsWith(path)) && token) {
+    console.log("vao ay");
+    if ((token && role == "admin") || role == "SUPER_ADMIN") {
+      return NextResponse.redirect(new URL("/admin", request.url));
+    }
     return NextResponse.redirect(new URL("/landing-page", request.url));
   }
 }

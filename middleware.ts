@@ -1,7 +1,34 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 const privatePaths = ["/tutor/become"];
-const adminPaths = ["/admin", "/admin/member", "/admin/member/[memberId]"];
+const adminPaths = [
+  "/admin",
+  "/admin/member",
+  "/admin/member/[memberId]",
+  "/admin/application",
+  "/admin/attendance",
+  "/admin/calendar",
+  "/admin/courses",
+  "/admin/courses/",
+  "/admin/courses/[courseId]",
+  "/admin/courses/employee",
+  "/admin/member/",
+  "/admin/member/[memberId]",
+  "/admin/application/",
+  "/admin/application/[applicationId]",
+  "/admin/attendance/",
+  "/admin/attendance/[attendanceId]",
+  "/admin/calendar/",
+  "/admin/calendar/[calendarId]",
+  "/admin/profile",
+  "/admin/room",
+  "/admin/room/[roomId]",
+  "/admin/schedule/",
+  "/admin/student",
+  "/admin/student/[studentId]",
+  "/admin/tutor",
+  "/admin/tutor/[tutorId]",
+];
 const authPaths = ["/auth/login", "/auth/register"];
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -13,7 +40,7 @@ export function middleware(request: NextRequest) {
 
   if (adminPaths.some((path) => pathname.startsWith(path))) {
     if (token && role !== "SUPER_ADMIN") {
-      return NextResponse.redirect(new URL("/", request.url));
+      return NextResponse.redirect(new URL("/landing-page", request.url));
     } else if (!token) {
       return NextResponse.redirect(new URL("/auth/login", request.url));
     } else if (token && role === "admin") {
@@ -22,7 +49,7 @@ export function middleware(request: NextRequest) {
   }
 
   if (authPaths.some((path) => pathname.startsWith(path)) && token) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/landing-page", request.url));
   }
 }
 export const config = {

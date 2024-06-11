@@ -75,7 +75,7 @@ function LoginForm() {
         setSuccess("Login success");
         setLoading(false);
         await SetToken(data);
-        router.push("/");
+        router.push("/landing-page");
       });
     } catch (error) {
       startTransition(() => {

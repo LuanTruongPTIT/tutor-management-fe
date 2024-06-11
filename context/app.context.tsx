@@ -14,7 +14,7 @@ interface UserProfile {
 }
 
 interface UserContextType {
-  setProfile: (profile: UserProfile) => void;
+  setProfile: (profile: UserProfile | null) => void;
   getProfile: () => UserProfile | null;
   isAuthenticated: () => boolean;
   deleteProfile: () => void;
@@ -54,8 +54,8 @@ export function UserProvider({
     }
   }, []);
 
-  const setProfile = (profile: UserProfile) => {
-    localStorage.setItem("profile", JSON.stringify(profile));
+  const setProfile = (profile: UserProfile | null | any) => {
+    profile && localStorage.setItem("profile", JSON.stringify(profile));
     setProfileState(profile);
   };
 

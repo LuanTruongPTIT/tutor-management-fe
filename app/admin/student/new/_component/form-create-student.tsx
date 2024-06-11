@@ -55,15 +55,15 @@ export default function FormCreateStudent() {
 
   async function onSubmit(values: any) {
     const form = { ...values, urls };
-
-    // try {
-    //   await adminApiRequest.CreateStudentByAdmin(form);
-    //   toast.success("Student created successfully");
-    // } catch (error: any) {
-    //   console.log(error);
-    //   console.log(error.payload.data);
-    //   toast.error(error.message);
-    // }
+    console.log("form", form);
+    try {
+      await adminApiRequest.CreateStudentByAdmin(form);
+      toast.success("Student created successfully");
+    } catch (error: any) {
+      console.log(error);
+      console.log(error.payload.payload.message);
+      toast.error(error.payload.payload.message);
+    }
   }
 
   return (
@@ -244,9 +244,9 @@ export default function FormCreateStudent() {
                             <SelectValue placeholder="Gender" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="Male">Male</SelectItem>
-                            <SelectItem value="Female">Female</SelectItem>
-                            <SelectItem value="Female">Other</SelectItem>
+                            <SelectItem value="1">Male</SelectItem>
+                            <SelectItem value="2">Female</SelectItem>
+                            <SelectItem value="3">Other</SelectItem>
                           </SelectContent>
                         </Select>
                       </FormControl>

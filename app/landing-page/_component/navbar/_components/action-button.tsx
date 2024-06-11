@@ -7,10 +7,12 @@ import { Button } from "@/components/ui/button";
 import { X, AlignJustify } from "lucide-react";
 import Link from "next/link";
 import DropdownMenu from "./drop-down-menu";
+import { useUser } from "@/context/app.context";
+import { UserNav } from "@/components/layout/user-nav";
 
 const ActionButtons = () => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
-
+  const { isAuthenticated } = useUser();
   const toggleDropdown = () => {
     setDropdownVisible(!isDropdownVisible);
   };
@@ -18,7 +20,7 @@ const ActionButtons = () => {
   const closeDropdown = () => {
     setDropdownVisible(false);
   };
-
+  const isAuthenticatedCheck = isAuthenticated();
   return (
     <div className="pr-2">
       <div className=" items-center justify-center flex ">
@@ -34,10 +36,16 @@ const ActionButtons = () => {
         </div>
 
         <div className="flex lg:space-x-4 items-center pr-4">
-          <Link href={"/free"}>
-            <Button
-              variant={"outline"}
-              className="
+          <Link href={"/contact"}>
+            <Button className="hidden lg:block">Get Preply free</Button>
+          </Link>
+          {isAuthenticatedCheck ? (
+            <UserNav />
+          ) : (
+            <Link href={"/auth/login"}>
+              <Button
+                variant={"outline"}
+                className="
             lg:flex
             items-center
             hidden
@@ -45,13 +53,11 @@ const ActionButtons = () => {
                 text-md
                 
                 "
-            >
-              Log in
-            </Button>
-          </Link>
-          <Link href={"/contact"}>
-            <Button className="hidden lg:block">Get Preply free</Button>
-          </Link>
+              >
+                Log in
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
 

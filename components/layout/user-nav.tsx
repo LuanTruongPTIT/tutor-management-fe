@@ -14,9 +14,14 @@ import {
 } from "../ui/dropdown-menu";
 
 export function UserNav() {
-  const { getProfile } = useUser();
-  const session = getProfile();
+  const { getProfile, setProfile } = useUser();
 
+  const session = getProfile();
+  async function LogOut() {
+    setProfile(null);
+    await fetch("/api/logout", { method: "POST" });
+    window.location.href = "/auth/login";
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -39,7 +44,7 @@ export function UserNav() {
               {session ? session.fullName : ""}
             </p>
             <p className="text-xs leading-none text-muted-foreground">
-              {/* {session.user?.email} */} luan@gmail.com
+              {session ? (session as any).email : ""}
             </p>
           </div>
         </DropdownMenuLabel>
@@ -50,17 +55,12 @@ export function UserNav() {
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            Billing
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
             Settings
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
-          <DropdownMenuItem>New Team</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={LogOut}>
           Log out
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>

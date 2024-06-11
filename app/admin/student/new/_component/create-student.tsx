@@ -8,7 +8,7 @@ interface FileUploadProps {
   onChange: (url?: string) => void;
   endpoint: keyof typeof ourFileRouter;
 }
-export default function CreateTutor() {
+export default function CreateStudent() {
   return (
     <div className="h-screen pt-[20px]">
       {/* <div className="flex flex-row items-start h-[600px] justify-center gap-7"> */}

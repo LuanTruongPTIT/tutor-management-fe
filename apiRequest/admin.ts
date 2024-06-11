@@ -16,4 +16,7 @@ export const adminApiRequest = {
   GetAllStudentByAdmin: () => {
     return http.get("/api/admin/get-all-student");
   },
+  CreateStudentByAdmin: (data: any) => {
+    return http.post("/api/admin/create-student-by-admin", data);
+  },
 };

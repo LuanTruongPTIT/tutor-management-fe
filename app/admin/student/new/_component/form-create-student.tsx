@@ -28,7 +28,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const formCreateTutor = z.object({
+const formCreateStudent = z.object({
   email: z.string().email(),
   password: z.string().min(10),
   firstName: z.string(),
@@ -41,28 +41,29 @@ const formCreateTutor = z.object({
   parent_name: z.string().optional(),
   level: z.string().optional(),
   date_of_birth: z.string().optional(),
+  name_school: z.string().optional(),
 });
 
 export default function FormCreateStudent() {
   const [isVisible, setIsVisible] = React.useState(false);
   const [urls, setUrls] = React.useState("");
   const toggleVisibility = () => setIsVisible(!isVisible);
-  const form = useForm<z.infer<typeof formCreateTutor>>({
-    resolver: zodResolver(formCreateTutor),
+  const form = useForm<z.infer<typeof formCreateStudent>>({
+    resolver: zodResolver(formCreateStudent),
     defaultValues: {},
   });
 
   async function onSubmit(values: any) {
     const form = { ...values, urls };
-    console.log("form", form);
-    try {
-      await adminApiRequest.CreateTutorByAdmin(form);
-      toast.success("Tutor created successfully");
-    } catch (error: any) {
-      console.log(error);
-      console.log(error.data);
-      toast.error(error.message);
-    }
+
+    // try {
+    //   await adminApiRequest.CreateStudentByAdmin(form);
+    //   toast.success("Student created successfully");
+    // } catch (error: any) {
+    //   console.log(error);
+    //   console.log(error.payload.data);
+    //   toast.error(error.message);
+    // }
   }
 
   return (
@@ -239,7 +240,7 @@ export default function FormCreateStudent() {
                           onValueChange={field.onChange}
                           defaultValue="Male"
                         >
-                          <SelectTrigger>
+                          <SelectTrigger className="h-[58px]">
                             <SelectValue placeholder="Gender" />
                           </SelectTrigger>
                           <SelectContent>
@@ -282,6 +283,50 @@ export default function FormCreateStudent() {
                           type="text"
                           variant="bordered"
                           label="Parent"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="level"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Select
+                          onValueChange={field.onChange}
+                          // defaultValue="Male"
+                        >
+                          <SelectTrigger className="h-[58px]">
+                            <SelectValue placeholder="Level" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="1">Primary</SelectItem>
+                            <SelectItem value="2">Secondary</SelectItem>
+                            <SelectItem value="3">High</SelectItem>
+                            <SelectItem value="4">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="name_school"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input
+                          type="text"
+                          variant="bordered"
+                          label="School Name"
                           {...field}
                         />
                       </FormControl>

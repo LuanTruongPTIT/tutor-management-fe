@@ -12,7 +12,7 @@ export function middleware(request: NextRequest) {
   }
 
   if (adminPaths.some((path) => pathname.startsWith(path))) {
-    if (token && role !== "super_admin") {
+    if (token && role !== "SUPER_ADMIN") {
       return NextResponse.redirect(new URL("/", request.url));
     } else if (!token) {
       return NextResponse.redirect(new URL("/auth/login", request.url));

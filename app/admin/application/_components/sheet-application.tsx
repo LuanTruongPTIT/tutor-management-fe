@@ -17,7 +17,7 @@ export const applicationDetailSchema = z.object({
   name: z.string(),
   college: z.string(),
   degree: z.string(),
-  degreeType: z.string(),
+  degree_type: z.string(),
   subject: z.array(z.string()),
   start_date_study_year: z.number(),
   end_date_study_year: z.number(),
@@ -125,7 +125,7 @@ const SheetDemo: React.FC<SheetDemoProps> = ({ id }) => {
                     style={{ width: "100%" }}
                     // addonBefore="http://"
                     // addonAfter=".com"
-                    placeholder={result?.degreeType}
+                    placeholder={result?.degree_type}
                     value="Computer Science"
                     disabled={true}
                   />

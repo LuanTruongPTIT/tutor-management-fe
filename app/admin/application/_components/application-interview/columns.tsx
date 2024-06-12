@@ -16,6 +16,9 @@ import {
 import { Button } from "@nextui-org/react";
 import { DataTableRowActionsInterview } from "./data-table-row-action-interview";
 import SelectStatus from "./select-status";
+import { DataTableRowActionsReview } from "../application-review/data-table-row-action-review";
+import { statuses_review } from "../application-review/columns-review";
+import SheetDemo from "../sheet-application";
 
 export const statuses_interview = [
   {
@@ -172,6 +175,10 @@ export const columns_interview: ColumnDef<ApplicationInterview>[] = [
     cell: ({ row }) => {
       return <SelectStatus row={row} />;
     },
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => <SheetDemo id={row.original.id} />,
   },
   {
     id: "actions",

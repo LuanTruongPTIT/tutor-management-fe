@@ -81,7 +81,7 @@ export default function CardDetailTutor({ data }: any) {
       >
         <Card className="w-[400px] my-5 max-h-[700px]">
           <CardHeader>
-            <CardTitle>About tutor Luan Truong</CardTitle>
+            <CardTitle>About tutor </CardTitle>
           </CardHeader>
           <CardContent className="flex items-center flex-col space-y-2">
             <Avatar className="h-[100px] w-[100px]">

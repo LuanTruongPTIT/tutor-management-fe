@@ -86,6 +86,12 @@ export const navItems: NavItem[] = [
     label: "employee",
   },
   {
+    title: "Manage Course",
+    href: "/admin/courses",
+    icon: "course",
+    label: "course",
+  },
+  {
     title: "Profile",
     href: "/admin/profile",
     icon: "profile",
@@ -124,7 +130,14 @@ export type Student = {
   join: Date;
   imageUrl: string;
 };
-
+export type Course = {
+  title: string;
+  count_student: number;
+  tutor: string;
+  price: number;
+  createdAt: Date;
+  status: string;
+};
 export type Tutor = {
   id: number;
   fullName: string;
@@ -155,3 +168,16 @@ export const students: Student[] = [
   },
 ];
 // export const TutorDetail
+export type schedule = {
+  id: number;
+  topic: string;
+  formal: string;
+  start_time: string;
+  end_time: string;
+  date: Date;
+  status: string;
+  class_name: string;
+  count_student: number;
+  course_name: string;
+  tutor_name: string;
+};

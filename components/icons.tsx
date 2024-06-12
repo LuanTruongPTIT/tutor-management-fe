@@ -31,6 +31,7 @@ import {
   X,
   Inbox,
   Presentation,
+  BookText,
 } from "lucide-react";
 
 export type Icon = LucideIcon;
@@ -64,6 +65,7 @@ export const Icons = {
   laptop: Laptop,
   inbox: Inbox,
   meeting: Presentation,
+  course: BookText,
   attendance: ({ ...props }: LucideProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"

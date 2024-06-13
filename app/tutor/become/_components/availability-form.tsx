@@ -180,7 +180,7 @@ export default function AvailabilityForm() {
           </div>
         )}
         {isSuccess && (
-          <div className="h-full w-[600px] flex flex-col items-center justify-center gap-[20px]">
+          <div className="h-full w-[600px] flex flex-col items-center justify-center gap-[20px] pt-[20px]">
             <div className="flex flex-col items-center">
               <Image
                 src={"/images/icons/icon-thank-you.svg"}

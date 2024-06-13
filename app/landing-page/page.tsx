@@ -2,6 +2,7 @@ import { Outfit } from "next/font/google";
 import HeroSection from "./_component/hero-section";
 import Navbar from "./_component/navbar/navbar";
 import FourthSection from "./_component/fourth-section";
+import Footer from "./_component/footer";
 
 // const LandingPage = () => {
 //   return (
@@ -36,6 +37,7 @@ export default function Page() {
           <SeventhSection />
           <GetStartedFree />
           <Footer /> */}
+      <Footer />
     </div>
   );
 }

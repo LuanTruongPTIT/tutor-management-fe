@@ -305,10 +305,10 @@ export default function FormCreateStudent() {
                             <SelectValue placeholder="Level" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="1">Primary</SelectItem>
-                            <SelectItem value="2">Secondary</SelectItem>
-                            <SelectItem value="3">High</SelectItem>
-                            <SelectItem value="4">Other</SelectItem>
+                            <SelectItem value="Primary">Primary</SelectItem>
+                            <SelectItem value="Secondary">Secondary</SelectItem>
+                            <SelectItem value="High">High</SelectItem>
+                            <SelectItem value="Other">Other</SelectItem>
                           </SelectContent>
                         </Select>
                       </FormControl>
